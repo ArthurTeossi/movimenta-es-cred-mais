@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8"> <!-- informacoes da pagina: aceita acentos -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- ajusta a pagina no celular -->
+    <title>Nova movimentação | CredMais</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilo.css') }}"> <!-- liga o css -->
+</head>
+<body>
+<div class="cabecalho">
+    <a href="{{ url_for('inicio') }}" class="marca"><img src="{{ url_for('static', filename='Uploads/logo.png') }}"
+                                                         alt="Logo CredMais" class="logo-imagem"></a>
+    <div class="menu">
+        <a href="{{ url_for('inicio') }}">Dashboard</a>
+        <a href="{{ url_for('inicio') }}">Perfil</a>
+        <a href="{{ url_for('inicio') }}">Simulação</a>
+        <a href="{{ url_for('inicio') }}">Empréstimos</a>
+        <a href="{{ url_for('inicio') }}" class="ativo">Movimentações</a>
+    </div>
+</div>
+<div class="pagina-movimentacao">
+    <div class="titulo-pagina">
+        <img src="{{ url_for('static', filename='Uploads/icone-calculadora.png') }}" alt="Calculadora"
+             class="icone-calculadora">
+        <div>
+            <h1>Nova movimentação</h1>
+            <p>Informe os dados e adicione uma nova despesa ou receita.</p>
+        </div>
+    </div>
+    {% for categoria_msg, mensagem in get_flashed_messages(with_categories=true) %}
+    <div class="mensagem {{ categoria_msg }}">{{ mensagem }}</div>
+    {% endfor %}
+    <div class="formulario-card">
+        <form action="{{ url_for('nova_movimentacao') }}" method="POST"> <!-- formulario que envia os dados -->
+            <div class="campo">
+                <label for="valor">Valor da Movimentação</label> <!-- texto que explica o campo -->
+                <input type="number" id="valor" name="valor" min="0.01" step="0.01" placeholder="R$ 0,00" required>
+                <!-- campo para digitar -->
+            </div>
+            <div class="campo">
+                <label for="descricao">Tipo de Movimentação</label>
+                <input type="text" id="descricao" name="descricao" placeholder="Ex.: Pagamento, empréstimo..."
+                       maxlength="100" required>
+            </div>
+            <div class="grupo">
+                <div class="titulo-campo">Categoria</div>
+                <div class="opcoes">
+                    <label class="opcao">
+                        <img src="{{ url_for('static', filename='Uploads/icone-receita-positiva.png') }}" alt="Receita"
+                             class="icone-categoria">
+                        <span class="texto-opcao">Receita</span>
+                        <input type="radio" name="categoria" value="Receita" required>
+                        <!-- bolinha de escolher uma opcao -->
+                    </label>
+                    <label class="opcao">
+                        <img src="{{ url_for('static', filename='Uploads/ícone-despesas.png') }}" alt="Despesa"
+                             class="icone-categoria">
+                        <span class="texto-opcao">Despesa</span>
+                        <input type="radio" name="categoria" value="Despesa" required>
+                    </label>
+                </div>
+            </div>
+            <div class="grupo">
+                <div class="titulo-campo">Classificação</div>
+                <div class="opcoes">
+                    <label class="opcao">
+                        <span class="texto-opcao">Fixo</span>
+                        <input type="radio" name="classificacao" value="1" required>
+                    </label>
+                    <label class="opcao">
+                        <span class="texto-opcao">Variável</span>
+                        <input type="radio" name="classificacao" value="2" required>
+                    </label>
+                </div>
+            </div>
+            <div class="botoes-formulario">
+                <button type="submit" class="botao-registrar">Registrar</button> <!-- botao que envia o formulario -->
+                <a href="{{ url_for('inicio') }}" class="botao-cancelar">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

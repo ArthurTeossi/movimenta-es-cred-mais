@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar movimentação | CredMais</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilo.css') }}">
+</head>
+<body>
+
+    <header class="cabecalho">
+        <a href="{{ url_for('inicio') }}" class="marca">
+            <img
+                src="{{ url_for('static', filename='Uploads/logo.png') }}"
+                alt="Logo CredMais"
+                class="logo-imagem"
+            >
+        </a>
+
+        <nav class="menu">
+            <a href="{{ url_for('inicio') }}">Dashboard</a>
+            <a href="{{ url_for('inicio') }}">Perfil</a>
+            <a href="{{ url_for('inicio') }}">Simulação</a>
+            <a href="{{ url_for('inicio') }}">Empréstimos</a>
+            <a href="{{ url_for('inicio') }}" class="ativo">Movimentações</a>
+        </nav>
+    </header>
+
+    <main class="pagina-movimentacao">
+
+        <section class="titulo-pagina">
+            <div class="icone-calculadora">
+                <img
+                    src="{{ url_for('static', filename='Uploads/icone-calculadora.png') }}"
+                    alt="Calculadora"
+                >
+            </div>
+
+            <div>
+                <h1>Editar movimentação</h1>
+                <p>Altere a descrição desta movimentação.</p>
+            </div>
+        </section>
+
+        {% with mensagens = get_flashed_messages(with_categories=true) %}
+            {% if mensagens %}
+                {% for categoria_msg, mensagem in mensagens %}
+                    <div class="mensagem {{ categoria_msg }}">
+                        {{ mensagem }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <section class="formulario-card">
+            <form
+                action="{{ url_for('editar_movimentacao', id_mov=mov.id) }}"
+                method="POST"
+            >
+
+                <div class="campo">
+                    <label for="descricao">Descrição</label>
+                    <input
+                        type="text"
+                        id="descricao"
+                        name="descricao"
+                        value="{{ mov.descricao }}"
+                        maxlength="100"
+                        required
+                    >
+                </div>
+
+                <div class="detalhes">
+
+                    <div class="detalhe">
+                        <span class="detalhe-rotulo">Categoria</span>
+                        <span class="detalhe-valor {% if mov.categoria == 'Receita' %}receita{% else %}despesa{% endif %}">
+                            {{ mov.categoria }}
+                        </span>
+                    </div>
+
+                    <div class="detalhe">
+                        <span class="detalhe-rotulo">Valor</span>
+                        <span class="detalhe-valor {% if mov.categoria == 'Receita' %}receita{% else %}despesa{% endif %}">
+                            {% if mov.categoria == 'Receita' %}+{% else %}-{% endif %}
+                            R$ {{ mov.valor|reais }}
+                        </span>
+                    </div>
+
+                    <div class="detalhe">
+                        <span class="detalhe-rotulo">Data</span>
+                        <span class="detalhe-valor">{{ mov.data_completa }}</span>
+                    </div>
+
+                </div>
+
+                <p class="nota-edicao">
+                    O valor, a categoria e a data não podem ser alterados.
+                </p>
+
+                <div class="botoes-formulario">
+                    <button type="submit" class="botao-registrar">
+                        Salvar
+                    </button>
+
+                    <a
+                        href="{{ url_for('visualizar_movimentacao', id_mov=mov.id) }}"
+                        class="botao-cancelar"
+                    >
+                        Cancelar
+                    </a>
+                </div>
+
+            </form>
+        </section>
+
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8"> <!-- informacoes da pagina: aceita acentos -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- ajusta a pagina no celular -->
+    <title>Visualizar movimentação | CredMais</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilo.css') }}"> <!-- liga o css -->
+</head>
+<body>
+<div class="cabecalho">
+    <a href="{{ url_for('inicio') }}" class="marca"><img src="{{ url_for('static', filename='Uploads/logo.png') }}"
+                                                         alt="Logo CredMais" class="logo-imagem"></a>
+    <div class="menu">
+        <a href="{{ url_for('inicio') }}">Dashboard</a>
+        <a href="{{ url_for('inicio') }}">Perfil</a>
+        <a href="{{ url_for('inicio') }}">Simulação</a>
+        <a href="{{ url_for('inicio') }}">Empréstimos</a>
+        <a href="{{ url_for('inicio') }}" class="ativo">Movimentações</a>
+    </div>
+</div>
+<div class="pagina-movimentacao">
+    <div class="titulo-pagina">
+        <img src="{{ url_for('static', filename='Uploads/icone-calculadora.png') }}" alt="Calculadora"
+             class="icone-calculadora">
+        <div>
+            <h1>Visualizar movimentação</h1>
+            <p>Confira os detalhes, edite a descrição ou exclua.</p>
+        </div>
+    </div>
+    {% for categoria_msg, mensagem in get_flashed_messages(with_categories=true) %}
+    <div class="mensagem {{ categoria_msg }}">{{ mensagem }}</div>
+    {% endfor %}
+    <div class="formulario-card">
+        <div class="detalhes">
+            <div class="detalhe">
+                <div class="detalhe-rotulo">Descrição</div>
+                <div class="detalhe-valor">{{ mov.descricao }}</div>
+            </div>
+            <div class="detalhe">
+                <div class="detalhe-rotulo">Categoria</div>
+                <div class="detalhe-valor {{ mov.classe }}">{{ mov.categoria }}</div>
+            </div>
+            <div class="detalhe">
+                <div class="detalhe-rotulo">Classificação</div>
+                <div class="detalhe-valor">{{ mov.classificacao }}</div>
+            </div>
+            <div class="detalhe">
+                <div class="detalhe-rotulo">Valor</div>
+                <div class="detalhe-valor {{ mov.classe }}">{{ mov.sinal }} R$ {{ mov.valor|reais }}</div>
+            </div>
+            <div class="detalhe">
+                <div class="detalhe-rotulo">Data</div>
+                <div class="detalhe-valor">{{ mov.data_completa }}</div>
+            </div>
+        </div>
+        <div class="botoes-formulario">
+            <a href="{{ url_for('editar_movimentacao', id_mov=mov.id) }}" class="botao-registrar">Editar</a>
+            <form action="{{ url_for('excluir_movimentacao', id_mov=mov.id) }}" method="POST"
+                  onsubmit="return confirm('Tem certeza que deseja excluir esta movimentação?');">
+                <!-- formulario do botao excluir. o onsubmit pergunta antes de excluir -->
+                <button type="submit" class="botao-excluir">Excluir</button> <!-- botao que envia o formulario -->
+            </form>
+        </div>
+        <a href="{{ url_for('inicio') }}" class="link-voltar">&larr; Voltar para movimentações</a>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,549 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --azul: #1768f9;
+    --azul-escuro: #153779;
+    --azul-claro: #d1e2ff;
+    --fundo: #f2f5fa;
+    --verde: #07965e;
+    --vermelho: #fa3529;
+    --branco: #ffffff;
+}
+
+html {
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'Inter', Arial, sans-serif;
+    background: var(--fundo);
+    color: var(--azul-escuro);
+}
+
+/* CABEÇALHO */
+
+.cabecalho {
+    min-height: 72px;
+    width: 100%;
+    padding: 8px 5.6%;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.12);
+    position: relative;
+    z-index: 2;
+}
+
+.marca {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
+.logo-imagem {
+    display: block;
+    width: 150px;
+    height: 50px;
+    object-fit: contain;
+    object-position: left center;
+}
+
+/* MENU */
+
+.menu {
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 27px;
+}
+
+.menu a {
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    color: var(--azul-escuro);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.menu a:hover {
+    color: var(--azul);
+}
+
+.menu a.ativo::after {
+    content: "";
+    height: 2px;
+    background: var(--azul);
+    border-radius: 5px;
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    right: 0;
+}
+
+/* CONTEÚDO */
+
+.pagina-movimentacao {
+    width: calc(100% - 48px);
+    max-width: 1100px;
+    margin: 41px auto 60px;
+}
+
+/* TÍTULO E ÍCONE DA PÁGINA */
+
+.titulo-pagina {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-left: 26px;
+    margin-bottom: 45px;
+}
+
+.icone-calculadora {
+    width: 68px;
+    height: 68px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border-radius: 0;
+    overflow: visible;
+}
+
+.icone-calculadora img {
+    width: 62px;
+    height: 62px;
+    display: block;
+    object-fit: contain;
+}
+
+.titulo-pagina h1 {
+    color: var(--azul-escuro);
+    font-size: 21px;
+    line-height: 28px;
+    font-weight: 700;
+}
+
+.titulo-pagina p {
+    color: #7186ad;
+    font-size: 12px;
+    line-height: 18px;
+    font-weight: 500;
+}
+
+/* MENSAGENS */
+
+.mensagem {
+    width: 100%;
+    max-width: 543px;
+    margin: -25px auto 20px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.mensagem.erro {
+    background: #ffe8e6;
+    color: #c92c24;
+}
+
+.mensagem.sucesso {
+    background: #e1f7ed;
+    color: #08794b;
+}
+
+/* CARTÃO DO FORMULÁRIO */
+
+.formulario-card {
+    width: 100%;
+    max-width: 543px;
+    min-height: 301px;
+    margin: 0 auto;
+    padding: 25px 24px 20px;
+    background: var(--branco);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(20, 48, 94, 0.03);
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.campo label,
+.campo-categoria legend {
+    color: var(--azul-escuro);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.campo input {
+    width: 100%;
+    height: 38px;
+    padding: 0 12px;
+    border: 1px solid #dce6f5;
+    border-radius: 9px;
+    outline: none;
+    color: var(--azul-escuro);
+    background: #ffffff;
+    font-family: inherit;
+    font-size: 12px;
+}
+
+.campo input:focus {
+    border-color: var(--azul);
+    box-shadow: 0 0 0 2px rgba(23, 104, 249, 0.1);
+}
+
+.campo input::placeholder {
+    color: #a4b2c8;
+}
+
+/* CATEGORIAS */
+
+.campo-categoria {
+    border: none;
+    margin-top: 18px;
+}
+
+.campo-categoria legend {
+    margin-bottom: 15px;
+}
+
+.opcoes-categoria {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.opcao {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    position: relative;
+    cursor: pointer;
+}
+
+/* ÍCONES PNG SEM FUNDO COLORIDO */
+
+.icone-categoria {
+    width: 58px;
+    height: 58px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border-radius: 0;
+    overflow: visible;
+}
+
+.receita-icone,
+.despesa-icone {
+    background: transparent;
+}
+
+.icone-categoria img {
+    width: 54px;
+    height: 54px;
+    display: block;
+    object-fit: contain;
+}
+
+.texto-opcao {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--azul-escuro);
+}
+
+/* BOTÕES DE SELEÇÃO */
+
+.opcao input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+
+.radio-personalizado {
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--azul-escuro);
+    border-radius: 50%;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.opcao input:checked + .radio-personalizado::after {
+    content: "";
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--azul-escuro);
+}
+
+.opcao input:focus-visible + .radio-personalizado {
+    outline: 2px solid var(--azul);
+    outline-offset: 3px;
+}
+
+/* BOTÕES DO FORMULÁRIO */
+
+.botoes-formulario {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 13px;
+    margin: 28px 35px 0;
+}
+
+.botao-registrar,
+.botao-cancelar,
+.botao-excluir {
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.botao-registrar {
+    border: 1px solid var(--azul);
+    background: var(--azul);
+    color: #ffffff;
+}
+
+.botao-registrar:hover {
+    background: #0d56dc;
+}
+
+.botao-cancelar {
+    border: 1px solid #6591ff;
+    background: var(--azul-claro);
+    color: var(--azul);
+}
+
+.botao-cancelar:hover {
+    background: #bdd5ff;
+}
+
+/* VISUALIZAR / EDITAR MOVIMENTAÇÃO */
+
+.detalhes {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 6px;
+}
+
+.detalhe {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #e6edf8;
+}
+
+.detalhe:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.detalhe-rotulo {
+    color: #7186ad;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.detalhe-valor {
+    color: var(--azul-escuro);
+    font-size: 17px;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+.detalhe-valor.receita {
+    color: #20bd72;
+}
+
+.detalhe-valor.despesa {
+    color: #ff3d4c;
+}
+
+.nota-edicao {
+    margin-top: 12px;
+    color: #7186ad;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.botao-excluir {
+    border: 1px solid #ff7777;
+    background: #fff0f0;
+    color: #ff3838;
+}
+
+.botao-excluir:hover {
+    background: #ffe2e2;
+}
+
+/* o formulário de excluir não ocupa espaço próprio: o botão entra direto na grade */
+.botoes-formulario form {
+    display: contents;
+}
+
+.link-voltar {
+    display: block;
+    margin-top: 18px;
+    text-align: center;
+    color: var(--azul);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.link-voltar:hover {
+    text-decoration: underline;
+}
+
+/* TABLETS */
+
+@media (max-width: 900px) {
+    .cabecalho {
+        padding: 10px 3%;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .menu {
+        gap: 18px;
+    }
+
+    .pagina-movimentacao {
+        width: calc(100% - 40px);
+        margin-top: 32px;
+    }
+
+    .titulo-pagina {
+        margin-left: 0;
+        margin-bottom: 35px;
+    }
+}
+
+/* CELULARES */
+
+@media (max-width: 600px) {
+    .cabecalho {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 12px 18px;
+        gap: 8px;
+    }
+
+    .logo-imagem {
+        width: 135px;
+        height: 45px;
+    }
+
+    .menu {
+        width: 100%;
+        min-height: auto;
+        justify-content: flex-start;
+        gap: 18px;
+        overflow-x: auto;
+        padding-bottom: 5px;
+    }
+
+    .menu a {
+        min-height: 32px;
+        font-size: 11px;
+    }
+
+    .menu a.ativo::after {
+        bottom: 0;
+    }
+
+    .pagina-movimentacao {
+        width: calc(100% - 28px);
+        margin: 26px auto 35px;
+    }
+
+    .titulo-pagina {
+        gap: 12px;
+        margin-bottom: 28px;
+    }
+
+    .icone-calculadora {
+        width: 58px;
+        height: 58px;
+    }
+
+    .icone-calculadora img {
+        width: 52px;
+        height: 52px;
+    }
+
+    .titulo-pagina h1 {
+        font-size: 17px;
+        line-height: 24px;
+    }
+
+    .titulo-pagina p {
+        font-size: 11px;
+        line-height: 16px;
+    }
+
+    .formulario-card {
+        padding: 22px 17px;
+    }
+
+    .opcoes-categoria {
+        gap: 18px;
+    }
+
+    .icone-categoria {
+        width: 48px;
+        height: 48px;
+    }
+
+    .icone-categoria img {
+        width: 46px;
+        height: 46px;
+    }
+
+    .texto-opcao {
+        font-size: 14px;
+    }
+
+    .botoes-formulario {
+        grid-template-columns: 1fr;
+        margin: 25px 0 0;
+        gap: 10px;
+    }
+}

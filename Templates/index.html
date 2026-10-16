@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8"> <!-- informacoes da pagina: aceita acentos -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- ajusta a pagina no celular -->
+    <title>Editar movimentação | CredMais</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilo.css') }}"> <!-- liga o css -->
+</head>
+<body>
+<div class="cabecalho">
+    <a href="{{ url_for('inicio') }}" class="marca"><img src="{{ url_for('static', filename='Uploads/logo.png') }}"
+                                                         alt="Logo CredMais" class="logo-imagem"></a>
+    <div class="menu">
+        <a href="{{ url_for('inicio') }}">Dashboard</a>
+        <a href="{{ url_for('inicio') }}">Perfil</a>
+        <a href="{{ url_for('inicio') }}">Simulação</a>
+        <a href="{{ url_for('inicio') }}">Empréstimos</a>
+        <a href="{{ url_for('inicio') }}" class="ativo">Movimentações</a>
+    </div>
+</div>
+<div class="pagina-movimentacao">
+    <div class="titulo-pagina">
+        <img src="{{ url_for('static', filename='Uploads/icone-calculadora.png') }}" alt="Calculadora"
+             class="icone-calculadora">
+        <div>
+            <h1>Editar movimentação</h1>
+            <p>Altere a descrição desta movimentação.</p>
+        </div>
+    </div>
+    {% for categoria_msg, mensagem in get_flashed_messages(with_categories=true) %}
+    <div class="mensagem {{ categoria_msg }}">{{ mensagem }}</div>
+    {% endfor %}
+    <div class="formulario-card">
+        <form action="{{ url_for('editar_movimentacao', id_mov=mov.id) }}" method="POST">
+            <!-- formulario que envia os dados -->
+            <div class="campo">
+                <label for="descricao">Descrição</label> <!-- texto que explica o campo -->
+                <input type="text" id="descricao" name="descricao" value="{{ mov.descricao }}" maxlength="100" required>
+                <!-- campo para digitar -->
+            </div>
+            <div class="detalhes">
+                <div class="detalhe">
+                    <div class="detalhe-rotulo">Categoria</div>
+                    <div class="detalhe-valor {{ mov.classe }}">{{ mov.categoria }}</div>
+                </div>
+                <div class="detalhe">
+                    <div class="detalhe-rotulo">Classificação</div>
+                    <div class="detalhe-valor">{{ mov.classificacao }}</div>
+                </div>
+                <div class="detalhe">
+                    <div class="detalhe-rotulo">Valor</div>
+                    <div class="detalhe-valor {{ mov.classe }}">{{ mov.sinal }} R$ {{ mov.valor|reais }}</div>
+                </div>
+                <div class="detalhe">
+                    <div class="detalhe-rotulo">Data</div>
+                    <div class="detalhe-valor">{{ mov.data_completa }}</div>
+                </div>
+            </div>
+            <p class="nota-edicao">O valor, a categoria, a classificação e a data não podem ser alterados.</p>
+            <div class="botoes-formulario">
+                <button type="submit" class="botao-registrar">Salvar</button> <!-- botao que envia o formulario -->
+                <a href="{{ url_for('visualizar_movimentacao', id_mov=mov.id) }}" class="botao-cancelar">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
